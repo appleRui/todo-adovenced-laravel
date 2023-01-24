@@ -9,9 +9,8 @@ class TodoRepository implements TodoRepositoryInterface
 {
     public function findAll($keyword = null)
     {
-      if($keyword == null) {
-        return Todo::all();
-      }
+      if($keyword == null) return Todo::all();
+      
       return Todo::where('content', 'like', "%$keyword%")->get();
     }
 
@@ -25,18 +24,14 @@ class TodoRepository implements TodoRepositoryInterface
     public function findById($id)
     {
       $todo = Todo::find($id);
-      if($todo == null) {
-        throw new HttpException(404, 'Not Found');
-      }
+      if($todo == null) throw new HttpException(404, 'Not Found');
       return $todo;
     }
 
     public function update($id, $content)
     {
       $todo = Todo::find($id);
-      if($todo == null) {
-        throw new HttpException(404, 'Not Found');
-      }
+      if($todo == null) throw new HttpException(404, 'Not Found');
       $todo->content = $content;
       return $todo->save();
     }
@@ -44,9 +39,7 @@ class TodoRepository implements TodoRepositoryInterface
     public function delete($id)
     {
       $todo = Todo::find($id);
-      if($todo == null) {
-        throw new HttpException(404, 'Not Found');
-      }
+      if($todo == null) throw new HttpException(404, 'Not Found');
       return $todo->delete();
     }
 }
