@@ -6,7 +6,7 @@ stop:
 
 restart:
 	./vendor/bin/sail down
-	./vendor/bin/sail up
+	./vendor/bin/sail up -d
 	./vendor/bin/sail build
 
 rebuild:
